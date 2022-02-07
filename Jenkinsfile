@@ -34,7 +34,7 @@ pipeline{
             {
                 steps{
                     sshagent(['balraj_deploy']) {
-                    sh "scp -o StrictHostKeyChecking=no  /var/lib/jenkins/workspace/Final_project_prod/target/*.jar ubuntu@172.31.91.96:/home/ubuntu/"
+                    sh "scp -i ~/.ssh/jaankey.pem  /var/lib/jenkins/workspace/Final_project_prod/target/*.jar ubuntu@172.31.91.96:/home/ubuntu/"
                                
                  }
               }
