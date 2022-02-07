@@ -30,10 +30,18 @@ pipeline{
                     sh "mvn package"
                 }
             }
-        
+        stage("Deploy")
+            {
+                steps{
+                    sshagent(['balraj_deploy']) {
+                    sh "scp -o StrictHostKeyChecking=no  /var/lib/jenkins/workspace/Final_project_prod/target/*.jar ubuntu@172.31.91.96:/home/ubuntu/"
+                               
+                 }
+              }
+           }
        }
 
-    post {
+   post {
         always{
             mail to: 'balraj.sabharwal@knoldus.com',
 			subject: "Pipeline: ${currentBuild.fullDisplayName} is ${currentBuild.currentResult}",
